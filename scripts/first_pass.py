@@ -9,6 +9,7 @@ from pydub import AudioSegment
 from beats.filtering import bass_band
 from beats.types import Vector
 
+
 if __name__ == "__main__":
     mp3_file = (
             Path(__file__).parent.parent

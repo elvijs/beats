@@ -8,6 +8,7 @@ from scipy.signal import lfilter
 
 from beats.types import Vector
 
+
 # Source: https://www.teachmeaudio.com/mixing/techniques/audio-spectrum#bass
 BASS_FREQ: Tuple[float, float] = (40.0, 200.0)
 
