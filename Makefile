@@ -13,7 +13,7 @@ install_as_package:
 	pip install -r $(TEST_REQUIREMENTS) & pip install .
 
 
-tests:
+test:
 	pytest $(TESTS)
 
 

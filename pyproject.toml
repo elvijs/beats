@@ -13,7 +13,11 @@ packages = [
 ]
 
 dependencies = [
-
+    "pydub>=0.25.1",
+    "numpy>=1.26.4",
+    "matplotlib>=3.8.4",
+    "plotly>=5.22.0",
+    "scipy>=1.13.0"
 ]
 
 
@@ -54,6 +58,7 @@ warn_unreachable = true
 pretty = true
 show_column_numbers = true
 show_error_context = true
+ignore_missing_imports = true
 
 
 [build-system]
