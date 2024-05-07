@@ -1,6 +1,9 @@
 # Minimal Makefile; tool configs in pyproject.toml
 
 TEST_REQUIREMENTS=test_requirements.txt
+SOURCE=src
+TESTS=tests
+SCRIPTS=scripts
 
 
 install:
@@ -11,7 +14,7 @@ install_as_package:
 
 
 tests:
-	pytest
+	pytest $(TESTS)
 
 
 freeze_requirements:
@@ -37,7 +40,7 @@ format: isort black
 
 
 lint:
-	pylint .
+	pylint $(SOURCE) $(TESTS) $(SCRIPTS)
 
 mypy:
 	mypy .
