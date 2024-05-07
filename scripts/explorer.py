@@ -40,7 +40,7 @@ if __name__ == "__main__":
     )
 
     x = np.arange(starting_s, starting_s + len_s, 1 / fs)
-    y = samples[int(starting_s * fs): int((starting_s + len_s) * fs)]
+    y = samples[int(starting_s * fs) : int((starting_s + len_s) * fs)]
 
     st.header("Raw signal")
     st.plotly_chart(px.line(x=x, y=y))

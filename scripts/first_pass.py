@@ -12,9 +12,9 @@ from beats.types import Vector
 
 if __name__ == "__main__":
     mp3_file = (
-            Path(__file__).parent.parent
-            / "data"
-            / "Fats Waller - Ain’t Misbehavin’ (163).mp3"
+        Path(__file__).parent.parent
+        / "data"
+        / "Fats Waller - Ain’t Misbehavin’ (163).mp3"
     )
     audio = AudioSegment.from_file(str(mp3_file), format="mp3")
     samples = np.array(audio.get_array_of_samples())

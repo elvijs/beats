@@ -14,7 +14,7 @@ BASS_FREQ: Tuple[float, float] = (40.0, 200.0)
 
 
 def bandpass_filter(
-        x: Vector, lowcut: float, highcut: float, fs: float, order: int = 5
+    x: Vector, lowcut: float, highcut: float, fs: float, order: int = 5
 ) -> Vector:
     nyq = 0.5 * fs  # Nyquist frequency
     low = lowcut / nyq
@@ -30,11 +30,11 @@ def bass_band(x: Vector, fs: float, order: int = 5) -> Vector:
 
 
 def bass_lowpass(
-        x: Vector,
-        fs: float,
-        cutoff: float = BASS_FREQ[1],
-        order: int = 8,
-        amplification_gain: float = 1.0,
+    x: Vector,
+    fs: float,
+    cutoff: float = BASS_FREQ[1],
+    order: int = 8,
+    amplification_gain: float = 1.0,
 ) -> Vector:
     nyq = 0.5 * fs  # Nyquist frequency
     normalized_cutoff = cutoff / nyq
