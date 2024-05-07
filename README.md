@@ -10,6 +10,10 @@ Determine the tempo of a song from its mp3.
 
 # Development
 
+## Prerequisites
+
+`sudo apt install ffmpeg`
+
 ## Install (dev mode)
 
 ```console
