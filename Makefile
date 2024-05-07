@@ -42,4 +42,4 @@ lint:
 mypy:
 	mypy .
 
-static_checks: mypy pylint
+static_checks: mypy lint
