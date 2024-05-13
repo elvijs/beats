@@ -46,3 +46,7 @@ mypy:
 	mypy .
 
 static_checks: mypy lint
+
+
+mlflow_server:
+	mlflow ui --backend-store-uri=mlflow --port=5000
