@@ -1,9 +1,9 @@
 [project]
 name = "beats"
-version = "0.0.0"
-description = "Determine the tempo of an mp3 song"
+version = "0.0.1"
+description = "Determine the tempo of an mp3 song. Tweaked for swing music."
 authors = [
-    {name = "Elvijs Sarkans", email = ""}
+    {name = "Elvijs Sarkans", email = "elvijs.sarkans@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.11"
@@ -22,9 +22,16 @@ dependencies = [
     "mlflow>=2,<3"
 ]
 
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
 
 [project.urls]
 repository = "https://github.com/elvijs/beats"
+homepage = "https://github.com/elvijs/beats"
+issues = "https://github.com/elvijs/beats/issues"
 
 
 [tool.pytest.ini_options]
