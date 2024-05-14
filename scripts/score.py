@@ -7,11 +7,11 @@ from typing import Sequence
 from typing import Tuple
 
 import librosa
+import mlflow
 import mlflow.tracking.fluent as mltrack
 import numpy as np
 import plotly.express as px
 
-import mlflow  # pylint:disable=ungrouped-imports  # isort trumps pylint
 from beats.estimators.api import Estimator
 from beats.estimators.librosa import Librosav1
 from beats.estimators.librosa import Librosav2
@@ -72,7 +72,7 @@ def store(metrics: Metrics, estimator: Estimator, dataset: Sequence[Path]) -> No
 
 
 def pipeline() -> None:
-    mlflow.set_tracking_uri(f"file://{MLFLOW_DIR}")  # type: ignore
+    mlflow.set_tracking_uri(f"file://{MLFLOW_DIR}")
     # unclear why MyPy doesn't see this
     mltrack.set_experiment("tempo-tracking")
 
