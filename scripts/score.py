@@ -1,4 +1,19 @@
-"""A little pipeline to score runs to a local MLflow."""
+"""A simple pipeline to score runs to a local MLflow.
+
+It allows users to evaluate a set of estimators
+on sample songs in the `<repo_base>/data` directory.
+
+Extend the `ESTIMATORS` constant below to score additional estimators.
+
+Once the script has completed, fire up the local MLflow viewer via `make mlflow_server`
+(make sure that the server's `mlflow` data directory aligns with that of
+the script output storage directory; this should happen automatically
+if you run the script from repo base).
+
+REQUIREMENTS:
+  * the song names have to start with the true tempo,
+    for example, `"056_my_slow_song.mp3"`.
+"""
 
 import dataclasses
 import hashlib
@@ -47,6 +62,7 @@ SONGS: Sequence[Tuple[Song, SamplingRate, Tempo]] = [song_from_file(d) for d in 
 
 
 def store(metrics: Metrics, estimator: Estimator, dataset: Sequence[Path]) -> None:
+    """Store metrics to the mlflow instance"""
     for k, v in dataclasses.asdict(metrics).items():
         if isinstance(v, (int, float)):
             mltrack.log_metric(k, v)
@@ -73,7 +89,6 @@ def store(metrics: Metrics, estimator: Estimator, dataset: Sequence[Path]) -> No
 
 def pipeline() -> None:
     mlflow.set_tracking_uri(f"file://{MLFLOW_DIR}")
-    # unclear why MyPy doesn't see this
     mltrack.set_experiment("tempo-tracking")
 
     for est in ESTIMATORS:

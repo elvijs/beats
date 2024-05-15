@@ -10,42 +10,38 @@ Determine the tempo of a song from its mp3. Designed for swing music. May work i
 
 This is essentially a thin wrapper on top of the amazing [`librosa`](https://librosa.org/doc/latest/index.html) library.
 
-# Usage
+# Estimating tempo of songs
 
-## Non-Python dependencies
+## Install
 
+Ensure you have the [`ffmpeg`](https://ffmpeg.org/) system-level package installed via e.g.
 ```console
 $ sudo apt install ffmpeg
 ```
 
-TODO: describe how to use the CLI
-
-# Development
-
-## Algorithm development
-
-### Scoring new estimators
-
-TODO: document how to score their songs.
-
-### Streamlit apps
-
-TODO
-
-## Package development
-
-### Install in dev mode
-
+Then install the package (in a Python virtual environment) via
 ```console
-$ make install
+$ pip install beats-swing
 ```
 
-### Common dev tasks
+## Usage
 
-* Auto-format: `make format`
-* Run static checkers: `make statec_checks`
-* Freeze the local env into `test_requirements` (say, after installing new deps):
-  `make freeze_requirements`.
+The main entrypoint is the CLI script `beats`:
+```console
+(venv) user@computer:~$ beats -f data/sample.mp3
+172
+```
+
+Alternatively, use the package directly in Python via the `Estimator` interface implementations.
+
+## Caveats
+
+* Supported formats: `mp3`, `m4a`.
+* This package is the simplest possible solution to estimating the tempo of swing songs
+  and has been tweaked against a small sample of songs.
+  If you find cases where it does a particularly bad job,
+  please raise [an issue](https://github.com/elvijs/beats/issues) and upload the relevant audio file.
+  * If you want to extend it in any way, please read the algorithm development guidelines on `DEVELOPMENT.md`.
 
 ## Issues
 
