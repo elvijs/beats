@@ -1,6 +1,6 @@
 # Based on
 # https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-pypi
-name: Publish Beats to PyPI
+name: build_release  # pushes tagged commits to PyPI
 on: push
 
 jobs:
