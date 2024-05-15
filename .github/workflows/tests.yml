@@ -36,7 +36,9 @@ jobs:
       run: make install
 
     - name: Run tests
-      run: make test
+      run: |
+        pip install pytest
+        make test
 
     - name: Run static checks
       run: make static_checks
