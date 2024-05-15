@@ -27,6 +27,8 @@ jobs:
 
     - name: Set up and test
       run: |
+        python -m venv venv
+        source venv/bin/activate
         make install
         make test
         make check_format
