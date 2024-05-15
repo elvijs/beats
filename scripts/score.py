@@ -18,10 +18,10 @@ from beats.estimators.librosa import Librosav2
 from beats.estimators.trivial import Zero
 from beats.estimators.utils import Metrics
 from beats.estimators.utils import score
-from beats.types import SamplingRate
-from beats.types import Song
-from beats.types import Tempo
-from beats.types import Vector
+from beats.shared_types import SamplingRate
+from beats.shared_types import Song
+from beats.shared_types import Tempo
+from beats.shared_types import Vector
 
 
 def song_from_file(

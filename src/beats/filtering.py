@@ -6,7 +6,7 @@ from scipy.signal import butter
 from scipy.signal import filtfilt
 from scipy.signal import lfilter
 
-from beats.types import Vector
+from beats.shared_types import Vector
 
 
 # Source: https://www.teachmeaudio.com/mixing/techniques/audio-spectrum#bass

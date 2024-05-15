@@ -7,7 +7,7 @@ import numpy as np
 from pydub import AudioSegment
 
 from beats.filtering import bass_band
-from beats.types import Vector
+from beats.shared_types import Vector
 
 
 if __name__ == "__main__":

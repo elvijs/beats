@@ -28,6 +28,9 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[project.scripts]
+beats = "beats.cli:main"
+
 [project.urls]
 repository = "https://github.com/elvijs/beats"
 homepage = "https://github.com/elvijs/beats"

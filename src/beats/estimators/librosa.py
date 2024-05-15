@@ -5,9 +5,9 @@ from typing import Mapping
 import librosa
 
 from beats.estimators.api import Estimator
-from beats.types import SamplingRate
-from beats.types import Song
-from beats.types import Tempo
+from beats.shared_types import SamplingRate
+from beats.shared_types import Song
+from beats.shared_types import Tempo
 
 
 class Librosav1(Estimator):

@@ -9,7 +9,7 @@ import streamlit as st
 from pydub import AudioSegment
 
 from beats.filtering import bass_lowpass
-from beats.types import Vector
+from beats.shared_types import Vector
 
 
 if __name__ == "__main__":

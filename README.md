@@ -6,21 +6,39 @@
 
 # What is it?
 
-Determine the tempo of a song from its mp3.
+Determine the tempo of a song from its mp3. Designed for swing music. May work in other cases as well.
+
+# Usage
+
+## Non-Python dependencies
+
+```console
+$ sudo apt install ffmpeg
+```
+
+TODO: describe how to use the CLI
 
 # Development
 
-## Prerequisites
+## Algorithm development
 
-`sudo apt install ffmpeg`
+### Scoring new estimators
 
-## Install (dev mode)
+TODO: document how to score their songs.
+
+### Streamlit apps
+
+TODO
+
+## Package development
+
+### Install in dev mode
 
 ```console
 $ make install
 ```
 
-## Usage
+### Common dev tasks
 
 * Auto-format: `make format`
 * Run static checkers: `make statec_checks`

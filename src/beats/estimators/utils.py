@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import r2_score
 
-from beats.types import Vector
+from beats.shared_types import Vector
 
 
 @dataclasses.dataclass
