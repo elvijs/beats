@@ -51,7 +51,8 @@ def _song_from_file(
     return Song(y), SamplingRate(fs)
 
 
-def _estimate_tempo(audio_file: Path) -> Tempo:
+def estimate_tempo(audio_file: Path) -> Tempo:
+    """Estimate the tempo of a song at the specified file."""
     song, fs = _song_from_file(audio_file)
     tempo = Librosav2().tempo(song, fs)
     return tempo
@@ -60,7 +61,7 @@ def _estimate_tempo(audio_file: Path) -> Tempo:
 def main() -> None:
     """Print the estimated tempo to stdout."""
     args = _parse_args()
-    tempo = _estimate_tempo(args.music_file)
+    tempo = estimate_tempo(args.music_file)
     print(int(tempo))
 
 
