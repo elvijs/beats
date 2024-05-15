@@ -26,7 +26,7 @@ jobs:
         python-version: 3.11
 
     - name: Set up and test
-      run: >-
+      run: |
         make install
         make test
         make check_format
