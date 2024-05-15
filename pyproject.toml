@@ -1,5 +1,5 @@
 [project]
-name = "beats"
+name = "beats_swing"
 version = "0.0.1"
 description = "Determine the tempo of an mp3 song. Tweaked for swing music."
 authors = [
