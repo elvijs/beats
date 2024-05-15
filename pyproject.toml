@@ -1,6 +1,6 @@
 [project]
 name = "beats_swing"
-version = "0.1.0"
+version = "0.1.1"
 description = "Determine the tempo of an mp3 song. Tweaked for swing music."
 authors = [
     {name = "Elvijs Sarkans", email = "elvijs.sarkans@gmail.com"}
@@ -13,13 +13,7 @@ packages = [
 ]
 
 dependencies = [
-    "pydub>=0.25.1,<1",
-    "numpy>=1.26.4,<2",
-    "matplotlib>=3.8.4,<4",
-    "plotly>=5.22.0,<6",
-    "scipy>=1.13.0,<2",
     "librosa>=0.10.2,<1",
-    "mlflow>=2,<3"
 ]
 
 classifiers = [

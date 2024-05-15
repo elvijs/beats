@@ -8,6 +8,8 @@
 
 Determine the tempo of a song from its mp3. Designed for swing music. May work in other cases as well.
 
+This is essentially a thin wrapper on top of the amazing [`librosa`](https://librosa.org/doc/latest/index.html) library.
+
 # Usage
 
 ## Non-Python dependencies
