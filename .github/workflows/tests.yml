@@ -25,14 +25,9 @@ jobs:
       with:
         python-version: 3.11
 
-    - name: Install
-      run: make install
-
-    - name: Run tests
-      run: make test
-
-    - name: Check code is correctly formatted
-      run: make check_format
-
-    - name: Check code passes the static checks
-      run: make static_checks
+    - name: Set up and test
+      run: >-
+        make install
+        make test
+        make check_format
+        make static_checks
