@@ -16,6 +16,7 @@ REQUIREMENTS:
 """
 
 import dataclasses
+import functools
 import hashlib
 from pathlib import Path
 from typing import Sequence
@@ -39,9 +40,10 @@ from beats.shared_types import Tempo
 from beats.shared_types import Vector
 
 
+@functools.lru_cache
 def song_from_file(
     audio_file: Path,
-) -> Tuple[Song, SamplingRate, Tempo]:  # TODO: cache?
+) -> Tuple[Song, SamplingRate, Tempo]:
     y, fs = librosa.load(str(audio_file), sr=None)
     # tempo should be encoded as the first 3 characters of the file name;
     # 50 is encoded as 050
