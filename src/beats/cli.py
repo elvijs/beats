@@ -9,6 +9,7 @@ import librosa
 
 from beats.constants import SUPPORTED_FORMATS
 from beats.estimators.librosa import Librosav2
+from beats.estimators.transformed import Transformed, cut
 from beats.shared_types import SamplingRate
 from beats.shared_types import Song
 from beats.shared_types import Tempo
@@ -54,7 +55,7 @@ def _song_from_file(
 def estimate_tempo(audio_file: Path) -> Tempo:
     """Estimate the tempo of a song at the specified file."""
     song, fs = _song_from_file(audio_file)
-    tempo = Librosav2().tempo(song, fs)
+    tempo = Transformed(transform=cut, estimator=Librosav2()).tempo(song, fs)
     return tempo
 
 
