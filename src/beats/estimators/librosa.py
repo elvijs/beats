@@ -3,6 +3,8 @@
 from typing import Mapping
 
 import librosa
+import numpy as np
+from librosa import onset
 
 from beats.estimators.api import Estimator
 from beats.shared_types import SamplingRate
@@ -13,20 +15,33 @@ from beats.shared_types import Tempo
 class Librosav1(Estimator):
     """Tempo estimator using `librosa.beat.beat_track`."""
 
-    def __init__(self, start_bpm: float = 120.0, tightness: float = 100.0):
+    def __init__(self, start_bpm: float = 120.0, max_tempo: float = 350.0):
         self._start_bpm = start_bpm
-        self._tightness = tightness
+        self._max_tempo = max_tempo
 
     def tempo(self, song: Song, fs: SamplingRate) -> Tempo:
-        tempo, _ = librosa.beat.beat_track(
-            y=song, sr=fs, start_bpm=self._start_bpm, tightness=self._tightness
+        onset_envelope = onset.onset_strength(
+            y=song,
+            sr=fs,
+            hop_length=512,
+            aggregate=np.median,
+            # constants from librosa.beat.beat_track
+        )
+        tempo = float(
+            librosa.beat.tempo(
+                y=song,
+                sr=fs,
+                start_bpm=self._start_bpm,
+                max_tempo=self._max_tempo,
+                onset_envelope=onset_envelope,
+            )
         )
         return Tempo(float(tempo))
 
     def params(self) -> Mapping[str, str | float | int]:
         return {
             "start_bpm": self._start_bpm,
-            "tightness": self._tightness,
+            "max_tempo": self._max_tempo,
         }
 
 
@@ -38,24 +53,44 @@ class Librosav2(Estimator):
     This approach seems to be surprisingly good at picking out harmonics.
     """
 
-    def __init__(self, start_bpm: float = 120.0, tightness: float = 100.0):
+    def __init__(self, start_bpm: float = 120.0, max_tempo: float = 350.0):
         self._start_bpm = start_bpm
-        self._tightness = tightness
+        self._max_tempo = max_tempo
 
     def tempo(self, song: Song, fs: SamplingRate) -> Tempo:
-        tempo, _ = librosa.beat.beat_track(
-            y=song, sr=fs, start_bpm=self._start_bpm, tightness=self._tightness
+        onset_envelope = onset.onset_strength(
+            y=song,
+            sr=fs,
+            hop_length=512,
+            aggregate=np.median,
+            # constants from librosa.beat.beat_track
         )
-        tempo2, _ = librosa.beat.beat_track(
-            y=song, sr=fs, start_bpm=float(tempo) * 2, tightness=self._tightness
+        tempo = float(
+            librosa.beat.tempo(
+                y=song,
+                sr=fs,
+                start_bpm=self._start_bpm,
+                max_tempo=self._max_tempo,
+                onset_envelope=onset_envelope,
+            )
+        )
+
+        tempo2 = float(
+            librosa.beat.tempo(
+                y=song,
+                sr=fs,
+                start_bpm=float(tempo) * 2,
+                max_tempo=self._max_tempo,
+                onset_envelope=onset_envelope,
+            )
         )
         if tempo2 >= 1.8 * tempo:
-            return Tempo(float(tempo2))
+            return Tempo(tempo2)
         else:
-            return Tempo(float(tempo))
+            return Tempo(tempo)
 
     def params(self) -> Mapping[str, str | float | int]:
         return {
             "start_bpm": self._start_bpm,
-            "tightness": self._tightness,
+            "max_tempo": self._max_tempo,
         }
