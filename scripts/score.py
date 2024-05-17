@@ -31,6 +31,8 @@ import plotly.express as px
 from beats.estimators.api import Estimator
 from beats.estimators.librosa import Librosav1
 from beats.estimators.librosa import Librosav2
+from beats.estimators.transformed import Transformed
+from beats.estimators.transformed import cut
 from beats.estimators.trivial import Zero
 from beats.estimators.utils import Metrics
 from beats.estimators.utils import score
@@ -54,12 +56,17 @@ def song_from_file(
 MLFLOW_DIR = Path(__file__).parent.parent / "mlflow"
 MP3_DIR = Path(__file__).parent.parent / "data"
 
+BIG_CUT = functools.partial(cut, start_proportion=0.2, end_proportion=0.8)
 ESTIMATORS: Sequence[Estimator] = [
     Zero(),
     Librosav1(),
     Librosav2(),
+    Transformed(transform=cut, estimator=Librosav1()),
+    Transformed(transform=cut, estimator=Librosav2()),
+    Transformed(transform=BIG_CUT, estimator=Librosav1()),
+    Transformed(transform=BIG_CUT, estimator=Librosav2()),
 ]
-DATASET = [f for f in MP3_DIR.iterdir() if f.suffix in [".mp3", ".m4a"]]
+DATASET = [f for f in MP3_DIR.rglob("*") if f.suffix in [".mp3", ".m4a"]]
 SONGS: Sequence[Tuple[Song, SamplingRate, Tempo]] = [song_from_file(d) for d in DATASET]
 
 
