@@ -84,8 +84,10 @@ def store(metrics: Metrics, estimator: Estimator, dataset: Sequence[Path]) -> No
     df["name"] = [d.name for d in dataset]
     mltrack.log_table(metrics.all_df, "details.json")
 
+    df["abs_err"] = df["error"].abs()
     mltrack.log_figure(
-        px.scatter(df, x="true", y="pred", hover_data="name"), "true_vs_pred.html"
+        px.scatter(df, x="true", y="pred", hover_data="name", color="abs_err"),
+        "true_vs_pred.html",
     )
 
 
