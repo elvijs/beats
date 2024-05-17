@@ -17,6 +17,7 @@ class Metrics:
     root_mean_squared_error: float
     mean_absolute_error: float
     r_squared: float
+    num_off_by_5: int
 
     all_df: pd.DataFrame
 
@@ -32,4 +33,5 @@ def score(predictions: Vector, ground_truth: Vector) -> Metrics:
         mean_absolute_error=float(abs(df["error"].mean())),
         r_squared=r2_score(df["pred"], df["true"]),
         all_df=df,
+        num_off_by_5=len(df[df["error"].abs() > 5]),
     )
