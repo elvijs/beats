@@ -2,6 +2,7 @@
 
 import argparse
 import dataclasses
+import functools
 from pathlib import Path
 from typing import Tuple
 
@@ -9,7 +10,8 @@ import librosa
 
 from beats.constants import SUPPORTED_FORMATS
 from beats.estimators.librosa import Librosav2
-from beats.estimators.transformed import Transformed, cut
+from beats.estimators.transformed import Transformed
+from beats.estimators.transformed import cut
 from beats.shared_types import SamplingRate
 from beats.shared_types import Song
 from beats.shared_types import Tempo
@@ -55,7 +57,10 @@ def _song_from_file(
 def estimate_tempo(audio_file: Path) -> Tempo:
     """Estimate the tempo of a song at the specified file."""
     song, fs = _song_from_file(audio_file)
-    tempo = Transformed(transform=cut, estimator=Librosav2()).tempo(song, fs)
+
+    # empirically, looking at just the middle of the song seems to work best
+    cut_to_middle = functools.partial(cut, start_proportion=0.45, end_proportion=0.55)
+    tempo = Transformed(transform=cut_to_middle, estimator=Librosav2()).tempo(song, fs)
     return tempo
 
 
