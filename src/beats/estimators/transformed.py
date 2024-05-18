@@ -46,3 +46,8 @@ def cut(song: Song, start_proportion: float = 0.1, end_proportion: float = 0.9) 
     min_idx, max_idx = int(n * start_proportion), int(n * end_proportion)
 
     return Song(song[min_idx:max_idx])
+
+
+def gold_standard_cut(song: Song) -> Song:
+    # empirically, looking at just the middle of the song seems to work best
+    return cut(song, start_proportion=0.45, end_proportion=0.55)
