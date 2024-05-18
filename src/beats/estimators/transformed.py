@@ -26,7 +26,12 @@ class Transformed(Estimator):
         try:
             params["transform"] = self._transform.__name__
         except AttributeError:
-            pass  # TODO: come back to this and solve `partial`
+            # assume the __name__ lookup fails on `partial`1§
+            params["transform"] = {
+                "name": self._transform.func.__name__,  # type: ignore
+                "args": self._transform.args,  # type: ignore
+                "kwargs": self._transform.keywords,  # type: ignore
+            }
         return params
 
     def __init__(self, transform: SongTransform, estimator: Estimator) -> None:
