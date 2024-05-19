@@ -13,7 +13,7 @@ if __name__ == "__main__":
     mp3_dir = Path(__file__).parent.parent / "data"
     mp3 = st.selectbox(
         "Which file would you like to explore?",
-        options=[f for f in mp3_dir.iterdir() if f.suffix in [".mp3", ".m4a"]],
+        options=[f for f in mp3_dir.rglob("*") if f.suffix in [".mp3", ".m4a"]],
     )
     y, fs = librosa.load(str(mp3), sr=None)
 
